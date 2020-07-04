@@ -1,0 +1,41 @@
+#!/usr/bin/env node 
+const program = require('commander')
+const {clone} = require('../../api/download')
+const path = require('path')
+const repo = 'github:su37josephxia/vue-template'
+const chalk = require('chalk')
+const symbols = require('log-symbols')
+const fs = require('fs')
+const handlebars = require('handlebars')
+
+program
+  .action(() => {
+    console.log('refresh .... ')
+  })
+
+program.parse(process.argv)
+
+const list = fs.readdirSync('./src/views')
+  .filter(v => v !== 'Home.vue')
+  .map(v => ({
+    name: v.replace('.vue', '').toLowerCase(),
+    file: v
+  }))
+
+compile({
+  list
+}, './src/router.js', './template/router.js.hbs')
+
+compile({
+  list
+}, './src/App.vue', './template/App.vue.hbs')
+
+function compile(meta, filePath, templatePath) {
+  if (fs.existsSync(templatePath)) {
+    const content = fs.readFileSync(templatePath).toString()
+    const result = handlebars.compile(content)(meta)
+    fs.writeFileSync(filePath, result)
+  }
+  console.log(symbols.success, chalk.green(`🚀 ${filePath} 创建成功`))
+}
+

@@ -1,0 +1,12 @@
+#!/usr/bin/env node 
+const program = require('commander')
+const {clone} = require('../../api/download')
+const path = require('path')
+const repo = 'github:su37josephxia/vue-template'
+program
+  .action(async name => {
+    console.log('🚀  创建项目：' + name)
+    clone(repo, path.join(__dirname, '../', name))
+  })
+
+  program.parse(process.argv)

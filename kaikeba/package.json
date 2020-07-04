@@ -1,0 +1,19 @@
+{
+  "name": "kkb-node",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "lvjiawen <daughlas@gmail.com> (https://github.com/daughlas)",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  },
+  "dependencies": {
+    "download-git-repo": "^3.0.2",
+    "ora": "^4.0.3"
+  }
+}
